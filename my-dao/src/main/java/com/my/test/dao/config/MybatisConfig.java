@@ -35,8 +35,8 @@ public class MybatisConfig {
 		try {
 			SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 			sessionFactoryBean.setDataSource(dataSource);
-			sessionFactoryBean.setTypeAliasesPackage("com.eagle.dao.entity");
-			Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:com/eagle/**/mapping/*.xml");
+			sessionFactoryBean.setTypeAliasesPackage("com.my.test.dao.entity");
+			Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:com/my/test/**/mapping/*.xml");
 			sessionFactoryBean.setMapperLocations(resources);
 			sessionFactoryBean.setConfigLocation(new DefaultResourceLoader().getResource("classpath:mybatis/mybatis-config.xml"));
 			return sessionFactoryBean.getObject();

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.test.dao.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.my.test.dao.entity.OrderItem">
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="single_price" jdbcType="DECIMAL" property="singlePrice" />
+    <result column="goods_num" jdbcType="INTEGER" property="goodsNum" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+  </resultMap>
+  <insert id="insert" parameterType="com.my.test.dao.entity.OrderItem">
+    insert into t_order_item (order_id, goods_name, single_price, 
+      goods_num, goods_price)
+    values (#{orderId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{singlePrice,jdbcType=DECIMAL}, 
+      #{goodsNum,jdbcType=INTEGER}, #{goodsPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.test.dao.entity.OrderItem">
+    insert into t_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="singlePrice != null">
+        single_price,
+      </if>
+      <if test="goodsNum != null">
+        goods_num,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="singlePrice != null">
+        #{singlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNum != null">
+        #{goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

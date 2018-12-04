@@ -12,6 +12,7 @@
     <modules>
         <module>my-parent</module>
         <module>my-dao</module>
+        <module>my-web-app</module>
     </modules>
 
 </project>
