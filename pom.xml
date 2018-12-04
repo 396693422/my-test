@@ -11,7 +11,7 @@
 
     <modules>
         <module>my-parent</module>
-        <module>my-sharding-jdbc</module>
+        <module>my-dao</module>
     </modules>
 
 </project>
