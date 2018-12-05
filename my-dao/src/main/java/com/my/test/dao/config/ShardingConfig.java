@@ -37,7 +37,7 @@ public class ShardingConfig {
         shardingRuleConfig.getTableRuleConfigs().add(getOrderItemTableRuleConfiguration());
         shardingRuleConfig.getBindingTableGroups().add("t_order, t_order_item");
 
-        shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "ds0"));
+        //shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "ds0"));
         shardingRuleConfig.setDefaultTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("user_id", new PreciseLongModuloShardingTableAlgorithm()));
         // 设置默认数据库
         shardingRuleConfig.setDefaultDataSourceName("ds0");
@@ -48,8 +48,8 @@ public class ShardingConfig {
         TableRuleConfiguration result = new TableRuleConfiguration();
         result.setLogicTable("t_order");
         result.setActualDataNodes("ds0.t_order${0..1}");
-        result.setKeyGeneratorColumnName("order_id");
-        result.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "ds0"));
+        //result.setKeyGeneratorColumnName("order_id");//总是生成偶数
+        //result.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "ds0"));
         result.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("order_id", new PreciseLongModuloShardingTableAlgorithm()));
         return result;
     }
@@ -58,6 +58,7 @@ public class ShardingConfig {
         TableRuleConfiguration result = new TableRuleConfiguration();
         result.setLogicTable("t_order_item");
         result.setActualDataNodes("ds0.t_order_item${0..1}");
+        result.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("order_id", new PreciseLongModuloShardingTableAlgorithm()));
         return result;
     }
 

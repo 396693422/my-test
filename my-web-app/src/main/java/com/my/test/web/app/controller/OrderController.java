@@ -1,20 +1,24 @@
 package com.my.test.web.app.controller;
 
-import com.my.test.dao.entity.Order;
-import com.my.test.dao.mapper.OrderMapper;
+import com.my.test.web.app.service.OrderService;
+import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RestController("order")
+@RestController
+@RequestMapping("order")
 public class OrderController {
 
-    @Autowired
-    private OrderMapper orderMapper;
+    private static DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
 
+    @Autowired
+    private OrderService orderService;
+
+    @PostMapping(value = "insertOrder", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public int insertOrder(){
-        Order order = new Order();
-        return orderMapper.insertSelective(order);
+        return orderService.insertOrder();
     }
 }

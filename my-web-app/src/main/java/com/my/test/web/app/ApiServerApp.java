@@ -22,10 +22,8 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @ComponentScan(basePackages = "com.my.test")
-@SpringBootApplication(exclude = { JdbcTemplateAutoConfiguration.class,
-		KafkaAutoConfiguration.class, DataSourceAutoConfiguration.class,
-		MongoDataAutoConfiguration.class, MongoAutoConfiguration.class})
-@MapperScan(basePackages = {"com.my.test.dao.mapper"})
+@SpringBootApplication
+@MapperScan(basePackages = {"com.my.test.dao.mapper","com.my.test.web.app.mapper"})
 public class ApiServerApp {
 
 	private static final Logger logger = LoggerFactory.getLogger(ApiServerApp.class);

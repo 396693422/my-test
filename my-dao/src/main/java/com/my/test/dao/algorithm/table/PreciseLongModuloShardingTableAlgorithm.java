@@ -19,9 +19,11 @@ package com.my.test.dao.algorithm.table;
 
 import io.shardingsphere.api.algorithm.sharding.PreciseShardingValue;
 import io.shardingsphere.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 
+@Slf4j
 public class PreciseLongModuloShardingTableAlgorithm implements PreciseShardingAlgorithm<Long> {
     
     @Override
@@ -29,6 +31,7 @@ public class PreciseLongModuloShardingTableAlgorithm implements PreciseShardingA
         int size = tableNames.size();
         for (String each : tableNames) {
             if (each.endsWith(shardingValue.getValue() % size + "")) {
+                log.info("当前操作分表屋里表:{}", each);
                 return each;
             }
         }
