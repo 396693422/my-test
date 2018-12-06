@@ -125,6 +125,7 @@
 
     <build>
         <resources>
+            <!-- mapping下的xml打到包中 -->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -133,28 +134,44 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
+                <!--是否使用参数值代替参数名。参数值取自properties元素或者文件里配置的属性，文件在filters元素里列出。-->
                 <filtering>false</filtering>
             </resource>
+            <!-- 除xml,参数值代替参数名 -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
                     <exclude>**/mybatis/*.xml</exclude>
-                    <exclude>**/cert/*.*</exclude>
-                    <exclude>**/config/*.*</exclude>
                 </excludes>
             </resource>
+            <!-- xml,不让参数值代替参数名 -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/mybatis/*.xml</include>
-                    <include>**/cert/*.*</include>
-                    <include>**/config/*.*</include>
                 </includes>
             </resource>
         </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
+            <!--<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
