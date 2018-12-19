@@ -99,6 +99,9 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <includes>
+                        <include>application-sharding.properties</include>
+                    </includes>
                     <excludes>
                         <exclude>application-*.properties</exclude>
                         <exclude>bootstrap.properties</exclude>
